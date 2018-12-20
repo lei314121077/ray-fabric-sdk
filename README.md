@@ -54,6 +54,19 @@
     
 
   
+  
+## 部署与应用
+  
+* docker
+   
+   * 执行Dockerfile生成docker镜像
+      
+      ```bash
+         docker build -t data-transfer-center
+      ```
+   
+  
+ 
     
 
 
