@@ -34,9 +34,11 @@
   应用程序通过向区块链网络发送交易来调用智能合约，从而操作账本中的状态。
 
   完整交易流程参见下图
+  
   ![交易流程图](https://pic4.zhimg.com/80/v2-155a55394f1d508c6c10bdf73aa3084f_hd.jpg)
   
   ChainCode角色图
+  
   ![ChainCode角色图](https://pic3.zhimg.com/80/v2-30fe8099f29c036254b59f3a0ac2147e_hd.jpg)
   
   
