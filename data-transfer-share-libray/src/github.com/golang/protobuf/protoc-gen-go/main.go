@@ -44,7 +44,7 @@
 // The generated code is documented in the package comment for
 // the library.
 //
-// See the README and documentation for protocol buffers to learn more:
+// See the README.md and documentation for protocol buffers to learn more:
 // 	https://developers.google.com/protocol-buffers/
 package main
 

@@ -14,7 +14,7 @@
 # If -C or -M option is specified, bench.results, profile file (bench-cpu.prof
 # bench-mem.prof) and the binary file are created in the specified packages
 # (if -P option is specified) or in all the packages (if -P option is not specified)
-# Refer to the Profiling section in the README.md file for more information on analyzing
+# Refer to the Profiling section in the README.md.md file for more information on analyzing
 # profile files.
 #
 # Run the script with -h option to print all the valid arguments.

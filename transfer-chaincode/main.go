@@ -6,7 +6,6 @@ import (
 	"service"
 )
 
-
 func main() {
 
 	if err := shim.Start(new(common.DataExchangeCenter)); err != nil {
