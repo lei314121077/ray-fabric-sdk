@@ -1,0 +1,37 @@
+version: 3
+
+services:
+
+  web:
+
+    image: data-transfer-chaincode
+    ports:
+      - 8080
+    networks:
+      - front-tier
+      - back-tier
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
