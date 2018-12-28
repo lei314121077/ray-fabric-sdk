@@ -22,7 +22,7 @@ const pkgLogID = "orderer/common/performance"
 
 var logger = flogging.MustGetLogger(pkgLogID)
 
-// BenchmarkServer is a pseudo-server that grpc services could be registered to
+// BenchmarkServer is a pseudo-server that grpc channels could be registered to
 type BenchmarkServer struct {
 	server ab.AtomicBroadcastServer
 	start  chan struct{}

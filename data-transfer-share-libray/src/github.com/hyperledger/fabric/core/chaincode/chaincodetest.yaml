@@ -16,7 +16,7 @@ server:
         # rootpath: "."
         # cadir: ".ca"
 
-        # port the CA services are listening on
+        # port the CA channels are listening on
         port: ":20051"
 
         # TLS certificate and key file paths
@@ -172,7 +172,7 @@ peer:
 
     # The Address this Peer will listen on
     listenAddress: 0.0.0.0:21212
-    # The Address this Peer will bind to for providing services
+    # The Address this Peer will bind to for providing channels
     address: 0.0.0.0:21212
     # Whether the Peer should programmatically determine the address to bind to.
     # This case is useful for docker containers.
@@ -233,7 +233,7 @@ peer:
         #       openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout testdata/server1.key -out testdata/server1.pem
         serverhostoverride: dummy
 
-    # PKI member services properties
+    # PKI member channels properties
     pki:
         eca:
             paddr: localhost:20051

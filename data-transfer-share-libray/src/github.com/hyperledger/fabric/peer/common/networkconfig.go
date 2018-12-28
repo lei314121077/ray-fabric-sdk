@@ -67,7 +67,7 @@ type ChannelNetworkConfig struct {
 	// Peers a list of peer-channels that are part of this organization
 	// to get the real Peer config object, use the Name field and fetch NetworkConfig.Peers[Name]
 	Peers map[string]PeerChannelConfig `yaml:"peers"`
-	// Chaincodes list of services
+	// Chaincodes list of channels
 	Chaincodes []string `yaml:"chaincodes"`
 }
 

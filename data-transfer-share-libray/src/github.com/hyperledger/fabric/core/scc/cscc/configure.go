@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
 // configuration transactions as the network is being reconfigured. The
 // configuration transactions arrive from the ordering service to the committer
 // who calls this chaincode. The chaincode also provides peer configuration
-// services such as joining a chain or getting configuration data.
+// channels such as joining a chain or getting configuration data.
 package cscc
 
 import (

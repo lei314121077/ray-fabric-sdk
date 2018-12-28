@@ -42,7 +42,7 @@ apt-get update
 apt-get -y install software-properties-common curl git sudo wget "build-essential" zlib1g-dev libbz2-dev
 
 #####################################
-# Install and setup Docker services #
+# Install and setup Docker channels #
 #####################################
 # Along with docker.io, aufs-tools also needs to be installed as 'auplink' which is part of aufs-tools package
 apt-get -y install docker.io aufs-tools

@@ -386,7 +386,7 @@ func TestLeaderElectionWithRealGossip(t *testing.T) {
 	// Spawn 10 gossip instances with single channel and inside same organization
 	// Run leader election on top of each gossip instance and check that only one leader chosen
 	// Create another channel includes sub-set of peers over same gossip instances {1,3,5,7}
-	// Run additional leader election services for new channel
+	// Run additional leader election channels for new channel
 	// Check correct leader still exist for first channel and new correct leader chosen in second channel
 	// Stop gossip instances of leader peers for both channels and see that new leader chosen for both
 
@@ -404,9 +404,9 @@ func TestLeaderElectionWithRealGossip(t *testing.T) {
 
 	waitForFullMembership(t, gossips, n, time.Second*30, time.Second*2)
 
-	logger.Warning("Starting leader election services")
+	logger.Warning("Starting leader election channels")
 
-	//Starting leader election services
+	//Starting leader election channels
 	services := make([]*electionService, n)
 
 	for i := 0; i < n; i++ {
@@ -428,8 +428,8 @@ func TestLeaderElectionWithRealGossip(t *testing.T) {
 	//Only leader should invoke callback function, so it is double check that only one leader exists
 	assert.Equal(t, 1, startsNum, "Only for one peer callback function should be called - chanA")
 
-	// Adding some peers to new channel and creating leader election services for peers in new channel
-	// Expecting peer 1 (first in list of election services) to become leader of second channel
+	// Adding some peers to new channel and creating leader election channels for peers in new channel
+	// Expecting peer 1 (first in list of election channels) to become leader of second channel
 	secondChannelPeerIndexes := []int{1, 3, 5, 7}
 	secondChannelName := "chanB"
 	secondChannelServices := make([]*electionService, len(secondChannelPeerIndexes))

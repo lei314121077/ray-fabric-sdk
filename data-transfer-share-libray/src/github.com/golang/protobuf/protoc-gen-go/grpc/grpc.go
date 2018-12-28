@@ -99,7 +99,7 @@ func (g *grpc) typeName(str string) string {
 // P forwards to g.gen.P.
 func (g *grpc) P(args ...interface{}) { g.gen.P(args...) }
 
-// Generate generates code for the services in the given file.
+// Generate generates code for the channels in the given file.
 func (g *grpc) Generate(file *generator.FileDescriptor) {
 	if len(file.FileDescriptorProto.Service) == 0 {
 		return

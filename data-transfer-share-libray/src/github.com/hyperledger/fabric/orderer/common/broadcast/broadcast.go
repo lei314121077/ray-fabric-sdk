@@ -23,7 +23,7 @@ var logger = flogging.MustGetLogger(pkgLogID)
 
 // Handler defines an interface which handles broadcasts
 type Handler interface {
-	// Handle starts a service thread for a given gRPC connection and services the broadcast connection
+	// Handle starts a service thread for a given gRPC connection and channels the broadcast connection
 	Handle(srv ab.AtomicBroadcast_BroadcastServer) error
 }
 
@@ -70,7 +70,7 @@ func NewHandlerImpl(sm ChannelSupportRegistrar) Handler {
 	}
 }
 
-// Handle starts a service thread for a given gRPC connection and services the broadcast connection
+// Handle starts a service thread for a given gRPC connection and channels the broadcast connection
 func (bh *handlerImpl) Handle(srv ab.AtomicBroadcast_BroadcastServer) error {
 	addr := util.ExtractRemoteAddress(srv.Context())
 	logger.Debugf("Starting new broadcast loop for %s", addr)

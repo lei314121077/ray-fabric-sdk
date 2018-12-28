@@ -73,7 +73,7 @@ function createDockerFile {
    } > $SDIR/fabric-ca-${1}.dockerfile
 }
 
-# Write services for the root fabric CA servers
+# Write channels for the root fabric CA servers
 function writeRootFabricCA {
    for ORG in $ORGS; do
       initOrgVars $ORG
@@ -81,7 +81,7 @@ function writeRootFabricCA {
    done
 }
 
-# Write services for the intermediate fabric CA servers
+# Write channels for the intermediate fabric CA servers
 function writeIntermediateFabricCA {
    for ORG in $ORGS; do
       initOrgVars $ORG
@@ -108,7 +108,7 @@ function writeSetupFabric {
    echo ""
 }
 
-# Write services for fabric orderer and peer containers
+# Write channels for fabric orderer and peer containers
 function writeStartFabric {
    for ORG in $ORDERER_ORGS; do
       COUNT=1
@@ -309,7 +309,7 @@ function writeHeader {
 networks:
   $NETWORK:
 
-services:
+channels:
 "
 }
 

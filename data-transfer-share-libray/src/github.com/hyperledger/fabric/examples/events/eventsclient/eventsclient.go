@@ -60,7 +60,7 @@ const (
 var logger = flogging.MustGetLogger("eventsclient")
 
 // deliverClient abstracts common interface
-// for deliver and deliverfiltered services
+// for deliver and deliverfiltered channels
 type deliverClient interface {
 	Send(*common.Envelope) error
 	Recv() (*peer.DeliverResponse, error)

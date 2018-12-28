@@ -35,7 +35,7 @@ func GetMgr() *Mgr {
 // Mgr encapsulate important interactions for events related to the interest of ledger
 type Mgr struct {
 	// rwlock is mainly used to synchronize across deploy transaction, chaincode install, and channel creation
-	// Ideally, different services in the peer should be designed such that they expose locks for different important
+	// Ideally, different channels in the peer should be designed such that they expose locks for different important
 	// events so that a code on top can synchronize across if needs to. However, in the lack of any such system-wide design,
 	// we use this lock for contextual use
 	rwlock               sync.RWMutex
