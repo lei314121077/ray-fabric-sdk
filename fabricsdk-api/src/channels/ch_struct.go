@@ -1,6 +1,9 @@
 package channels
 
-import "github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
+import (
+	"github.com/hyperledger/fabric-sdk-go/pkg/client/common/discovery/greylist"
+	"github.com/hyperledger/fabric-sdk-go/pkg/common/providers/fab"
+)
 
 // Request 包含查询和执行一个调用交易的参数
 type Request struct {
@@ -28,3 +31,31 @@ type Response struct {
 	ChaincodeStatus  int32
 	Payload          []byte
 }
+
+
+
+type Client struct {
+	context      context.Channel
+	membership   fab.ChannelMembership
+	eventService fab.EventService
+	greylist     *greylist.Filter
+	clientTally  // nolint
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
