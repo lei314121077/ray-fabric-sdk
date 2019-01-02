@@ -14,6 +14,7 @@ var(
 )
 
 func main() {
+
 	flag.Parse()
 
 	mux := http.NewServeMux()
@@ -24,7 +25,7 @@ func main() {
 		w.Write([]byte("This is an example server.\n"))
 	})
 
-	//注册用户
+	// 注册用户
 	mux.HandleFunc("/reguser", func(w http.ResponseWriter, req *http.Request){})
 
 	// tls验证
