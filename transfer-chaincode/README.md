@@ -1,20 +1,5 @@
 #  交易中心-智能合约 [上海数据交易中心](https://fe.chinadep.com/user/public/helpDocument.html) 
 
-目录
-
-```bash
-.
-├── README.md
-├── bin
-├── pkg
-├─── src
-| ├──server     # 业务处理模块
-| └──banchmark  #测试
-|    
-└── main.go
-
-```
-
 
 ## 上海数据交易中心应用
 
@@ -36,12 +21,11 @@
        
 ## 如何接入
  
-    通过SDK的Peer操作智能合约相关逻辑
-
+  通过SDK的Peer操作智能合约相关逻辑
 
 ## 数据处理
 
-    CouchDB数据库
+  CouchDB数据库
     
 # 如何用智能合约去实现
   
@@ -71,9 +55,10 @@
 
 ## 链码功能
    
-    Peer节点主要功能是调用链码执行交易和记账，其中交易执行由背书节点的链码负责，记账功能由记账节点负责。
+   Peer节点主要功能是调用链码执行交易和记账，其中交易执行由背书节点的链码负责，记账功能由记账节点负责。
 
-   ![fabric](pkg/fabric账本.jpg)
+   ![fabric](/home/ray/go/data-transfer-chaincode/transfer-chaincode/pkg/chaincode.jpg)
+
    链码与Peer节点的交互过程如下：
    
    * A、链码通过gRPC与Peer节点交互，当Peer节点收到客户端的交易提案请求后，会发送一个链码消息对象（包含交易提案信息、调用者信息）给对应的链码。
@@ -82,16 +67,15 @@
    
    * C、链码发送模拟执行结果给Peer节点，Peer节点对交易提案和模拟执行结果进行背书签名。  
   
-  
 ## 部署与应用
   
-* docker
-   
-   * 执行Dockerfile生成docker镜像
-      
-      ```bash
-         docker build -t data-transfer-center
-      ```
+docker
+
+* 执行Dockerfile生成docker镜像
+  
+  ```bash
+     docker build -t data-transfer-center
+  ```
    
   
  
