@@ -42,6 +42,16 @@
 
 * Hyperledger Fabric v1.0.0
 
+```bash
+    
+    # 更新版本
+    go get -u github.com/hyperledger/fabric
+
+    # 克隆版本
+    git clone -b v1.0.0 https://github.com/hyperledger/fabric.git
+
+```
+
 * Docker 
     
     ```bash
@@ -63,6 +73,23 @@
       go version go1.10 
     ```    
 
+* 拉取镜像
+    
+    ```bash
+    # 上DockerHub官方镜像网站： https://hub.docker.com/u/hyperledger/?page=1
+    docker pull hyperledger/fabric-tools:x86_64-1.0.0
+    docker pull hyperledger/fabric-couchdb:x86_64-1.0.0
+    docker pull hyperledger/fabric-kafka:x86_64-1.0.0
+    docker pull hyperledger/fabric-zookeeper:x86_64-1.0.0
+    docker pull hyperledger/fabric-orderer:x86_64-1.0.0
+    docker pull hyperledger/fabric-javaenv:x86_64-1.0.0
+    docker pull hyperledger/fabric-ccenv:x86_64-1.0.0
+    docker pull hyperledger/fabric-ca:x86_64-1.0.0
+    docker pull hyperledger/fabric-baseos:x86_64-0.3.1
+    docker pull hyperledger/fabric-baseimage:x86_64-0.3.1
+    docker pull hyperledger/fabric-membersrvc:latest
+    docker images
+    ```
 
 
 ## 部署
