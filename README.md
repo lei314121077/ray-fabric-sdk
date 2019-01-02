@@ -42,15 +42,18 @@
 
 * Hyperledger Fabric v1.0.0
 
-```bash
+    ```bash
+        
+        # 更新版本
+        go get -u github.com/hyperledger/fabric
     
-    # 更新版本
-    go get -u github.com/hyperledger/fabric
-
-    # 克隆版本
-    git clone -b v1.0.0 https://github.com/hyperledger/fabric.git
-
-```
+        # 克隆版本
+        git clone -b v1.4.0 https://github.com/hyperledger/fabric.git
+      
+        # 或者
+        git checkout -b v1.4.0
+    
+    ```
 
 * Docker 
     
@@ -88,7 +91,15 @@
     docker pull hyperledger/fabric-baseos:x86_64-0.3.1
     docker pull hyperledger/fabric-baseimage:x86_64-0.3.1
     docker pull hyperledger/fabric-membersrvc:latest
+    
+    # 查看镜像
     docker images
+    
+    # 如果下载有失败的镜像, 可再次执行下面的命令重新下载。 
+    
+    cd github.com/hyperledger/fabric/blob/master/scripts
+    sudo ./bootstrap.sh 1.2.0
+  
     ```
 
 
