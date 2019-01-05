@@ -50,7 +50,7 @@ func (d *DataExchangeCenter) Invoke(stub shim.ChaincodeStubInterface) pb.Respons
 	case "queryAssetHistory":
 		return d.user.QueryAssetHistory(stub,args)
 	// 转账
-	case "PaymentTransfer":
+	case "paymentTransfer":
 		return d.payment.PaymentTransfer(stub, args)
 
 	default:

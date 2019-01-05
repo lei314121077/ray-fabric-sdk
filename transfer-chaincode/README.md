@@ -2,6 +2,8 @@
 
 [参考](https://www.chaindesk.cn/witbook/11/117)
 
+链是由一个通道 + 一个共享账本 + N个 peer 节点组成；
+
 ## 上海数据交易中心应用
 
 营销应用
