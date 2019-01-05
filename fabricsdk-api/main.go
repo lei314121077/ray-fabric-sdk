@@ -1,17 +1,18 @@
 package main
 
 import (
-	"crypto/tls"
-	"flag"
-	"fmt"
+
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt"
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fab/ccpackager/gopackager"
 	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/common/cauthdsl"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
-	"log"
+	"crypto/tls"
 	"net/http"
+	"flag"
+	"fmt"
+	"log"
 	"os"
 	"./src/fsdk"
 )
@@ -25,7 +26,6 @@ var(
 
 const (
 	ChaincodeVersion  = "1.0"      //指定Chaincode 版本
-
 	configFile = "config.yaml"   // config.yaml 文件
 	initialized = false
 	SimpleCC = "simplecc"
@@ -102,7 +102,7 @@ func startSdk(){
 		UserName:"User1",
 
 	}
-	
+
 	sdk, err := fsdk.SetupSDK(configFile, initialized)
 	if err != nil {
 		fmt.Printf(err.Error())
