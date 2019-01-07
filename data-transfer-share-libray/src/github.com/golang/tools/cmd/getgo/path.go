@@ -108,7 +108,7 @@ func isShell(name string) bool {
 // registry.
 func persistEnvVarWindows(name, value string) error {
 	_, err := runCommand(context.Background(), "powershell", "-command",
-		fmt.Sprintf(`[Environment]::SetEnvironmentVariable("%s", "%s", "User")`, name, value))
+		fmt.Sprintf(`[Environment]::SetEnvironmentVariable("%s", "%s", "UserApi")`, name, value))
 	return err
 }
 
@@ -121,7 +121,7 @@ func persistEnvVar(name, value string) error {
 		if isShell("cmd.exe") || isShell("powershell.exe") {
 			return os.Setenv(strings.ToUpper(name), value)
 		}
-		// User is in bash, zsh, etc.
+		// UserApi is in bash, zsh, etc.
 		// Also set the environment variable in their shell config.
 	}
 

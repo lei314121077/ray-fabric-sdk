@@ -1,41 +1,26 @@
 package main
 
 import (
-
+	"./src/fsdk"
+	"./src/web"
+	"ray/fsdkapi"
+	"fmt"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt"
 	"github.com/hyperledger/fabric-sdk-go/pkg/common/errors/retry"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fab/ccpackager/gopackager"
-	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/common/cauthdsl"
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
-	"crypto/tls"
-	"net/http"
-	"flag"
-	"fmt"
-	"log"
+	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/common/cauthdsl"
 	"os"
-	"./src/fsdk"
 )
 
-var(
-
-	addr = flag.String("http", "localhost:50051", "endpoint of YourService")
-
-)
-
-
+//TODO https://godoc.org/github.com/hyperledger/fabric-sdk-go/pkg/fabsdk/api
 const (
 	ChaincodeVersion  = "1.0"      //指定Chaincode 版本
 	configFile = "config.yaml"   // config.yaml 文件
 	initialized = false
 	SimpleCC = "simplecc"
 )
-
-
-func init(){
-	startSdk()  // 初始化SDK
-}
-
 
 func InstallAndInstantiateCC(sdk *fabsdk.FabricSDK, info *fsdk.InitInfo) (*channel.Client, error) {
 
@@ -85,84 +70,63 @@ func InstallAndInstantiateCC(sdk *fabsdk.FabricSDK, info *fsdk.InitInfo) (*chann
 
 
 
-func startSdk(){
+func startSdk()*channel.Client {
 
 	initInfo := &fsdk.InitInfo{
 
-		ChannelID: "ray-data-transfer",
+		ChannelID:     "ray-data-transfer",
 		ChannelConfig: os.Getenv("GOPATH") + "/src/github.com/data-transfer-chaincode/.../channel.tx",
 
-		OrgAdmin:"Admin",
-		OrgName:"Org1",
+		OrgAdmin:       "Admin",
+		OrgName:        "Org1",
 		OrdererOrgName: "orderer.www.google.com",
 
-		ChaincodeID: SimpleCC,
+		ChaincodeID:     SimpleCC,
 		ChaincodeGoPath: os.Getenv("GOPATH"),
-		ChaincodePath: "github.com/www.google.com/chaincode/",
-		UserName:"User1",
-
+		ChaincodePath:   "github.com/www.google.com/chaincode/",
+		UserName:        "User1",
 	}
 
 	sdk, err := fsdk.SetupSDK(configFile, initialized)
 	if err != nil {
 		fmt.Printf(err.Error())
-		return
+		return nil
 	}
 
 	defer sdk.Close()
 
-	err = fsdk.CreateChannel(sdk, initInfo)
-	if err != nil {
+	if err := fsdk.CreateChannel(sdk, initInfo); err != nil {
 		fmt.Println(err.Error())
-		return
+		return nil
 	}
 
 	channelClient, err := InstallAndInstantiateCC(sdk, initInfo)
 	if err != nil {
 		fmt.Println(err.Error())
-		return
+		return nil
 	}
 
 	fmt.Println(channelClient)
-
+	return channelClient
 }
 
 
 
 func main() {
 
-	flag.Parse()
-
-	mux := http.NewServeMux()
-
-	// 根目录
-	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
-		w.Write([]byte("这是一个示例服务.\n"))
-	})
-
-	// 注册用户
-	mux.HandleFunc("/reguser", func(w http.ResponseWriter, req *http.Request){})
-
-	// tls验证
-	cfg := &tls.Config{
-		MinVersion:               tls.VersionTLS12,
-		CurvePreferences:         []tls.CurveID{tls.CurveP521, tls.CurveP384, tls.CurveP256},
-		PreferServerCipherSuites: true,
-		CipherSuites: []uint16{
-			tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
-			tls.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
-			tls.TLS_RSA_WITH_AES_256_GCM_SHA384,
-			tls.TLS_RSA_WITH_AES_256_CBC_SHA,
-		},
+	//启动SDK
+	if channelClient := startSdk(); channelClient != nil{
+		//启动https服务
+		serviceSetup := fsdkapi.ServiceSetup{
+			ChaincodeID:SimpleCC,
+			Client:channelClient,
+		}
+		app := fsdkapi.Application{
+			Setup: &serviceSetup,
+		}
+		web.HttpStart(app)
 	}
 
+	fmt.Println("启动失败!")
 
-	srv := &http.Server{
-		Addr:         *addr,
-		Handler:      mux,
-		TLSConfig:    cfg,
-		TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler), 0),
-	}
-	log.Fatal(srv.ListenAndServeTLS("tls.crt", "tls.key"))
 }

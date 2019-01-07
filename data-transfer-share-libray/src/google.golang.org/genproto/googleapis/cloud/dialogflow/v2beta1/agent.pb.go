@@ -84,7 +84,7 @@ type Agent struct {
 	Description string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
 	// Optional. The URI of the agent's avatar.
 	// Avatars are used throughout the Dialogflow console and in the self-hosted
-	// [Web Demo](https://dialogflow.com/docs/integrations/web-demo) integration.
+	// [Web DemoApi](https://dialogflow.com/docs/integrations/web-demo) integration.
 	AvatarUri string `protobuf:"bytes,7,opt,name=avatar_uri,json=avatarUri,proto3" json:"avatar_uri,omitempty"`
 	// Optional. Determines whether this agent should log conversation queries.
 	EnableLogging bool `protobuf:"varint,8,opt,name=enable_logging,json=enableLogging,proto3" json:"enable_logging,omitempty"`

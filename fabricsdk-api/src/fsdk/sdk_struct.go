@@ -4,6 +4,7 @@ import "github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt"
 
 
 type InitInfo struct {
+
 	ChannelID     string			// 通道名称 ID
 	ChannelConfig string			// 通道交易配置文件所在路径
 	OrgName      string				// 组织的名称
