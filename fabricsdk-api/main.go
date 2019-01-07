@@ -110,13 +110,10 @@ func startSdk()*channel.Client {
 	return channelClient
 }
 
-
-
 func main() {
 
-	//启动SDK
+	//启动SDK 判断channel句柄是否为nil
 	if channelClient := startSdk(); channelClient != nil{
-		//启动https服务
 		serviceSetup := fsdkapi.ServiceSetup{
 			ChaincodeID:SimpleCC,
 			Client:channelClient,
@@ -124,6 +121,7 @@ func main() {
 		app := fsdkapi.Application{
 			Setup: &serviceSetup,
 		}
+		//启动https服务
 		web.HttpStart(app)
 	}
 

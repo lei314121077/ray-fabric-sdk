@@ -5,7 +5,7 @@ import (
 	"ray/fsdkapi"
 )
 
-func (s *fsdkapi.ServiceSetup) UserDemoSer(u User)(string, error){
+func (s *fsdkapi.ServiceSetup) UserDemoSer(name, passwd string)(string, error){
 
 	fmt.Println("User Demo Server")
 
