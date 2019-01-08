@@ -42,7 +42,7 @@ func InstallAndInstantiateCC(sdk *fabsdk.FabricSDK, info *fsdk.InitInfo) (*chann
 	fmt.Println("指定的链码安装成功")
 	fmt.Println("开始实例化链码......")
 
-	//  returns a policy that requires one valid
+	// 返回一个有效的策略
 	ccPolicy := cauthdsl.SignedByAnyMember([]string{"org1.google.com"})
 
 	instantiateCCReq := resmgmt.InstantiateCCRequest{Name: info.ChaincodeID, Path: info.ChaincodePath, Version: ChaincodeVersion, Args: [][]byte{[]byte("init")}, Policy: ccPolicy}
@@ -123,8 +123,7 @@ func main() {
 		}
 		//启动https服务
 		web.HttpStart(app)
+	}else{
+		fmt.Println("启动失败!")
 	}
-
-	fmt.Println("启动失败!")
-
 }

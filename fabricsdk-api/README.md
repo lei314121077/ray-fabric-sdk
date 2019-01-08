@@ -12,6 +12,31 @@
 
 * E、调用fsbsdk.Close（）函数释放资源和缓存。
 
+* pkg
+
+    * pkg/fab/channel/transactor.go： 从channel中获取orderer信息，给orderer发送相关tx。
+    
+    * pkg/client/channel/chclient.go：创建channel的client，执行query或者invoke（execute）
+    
+    * pkg/fab/endpointconfig.go： 根据配置文件，初始化channel，peer和orderer。
+    
+    * pkg/client/channel/invoke/txnhandler.go： endorseHandler，创建和发送Tx。
+    
+    * pkg/fab/txn/proposal.go： proposal相关操作，创爱，签名，发送。
+    
+    * pkg/fab/peer/peer.go：peer的endpoint相关属性和方法实现
+    
+    * pkg/fab/orderer/orderer.go： orderer的相关相关属性和方法实现
+    
+    * pkg/fab/peer/peerendorser.go： endorse相关属性和方法实现
+    
+    * pkg/fab/txn/txn.go： 交易相关操作（orderer），调用grpc方法
+
+作者：kamiSDY
+链接：https://www.jianshu.com/p/8abae69d9ea9
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
+
 [Channel](https://godoc.org/github.com/hyperledger/fabric-sdk-go/pkg/client/channel)使用流程如下：
 
 * A、准备通道客户端上下文
