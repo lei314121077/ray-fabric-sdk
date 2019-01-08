@@ -40,7 +40,7 @@
 
 ## 版本&环境
 
-* Hyperledger Fabric v1.0.0
+* Hyperledger Fabric v1.4.0
 
     ```bash
         
