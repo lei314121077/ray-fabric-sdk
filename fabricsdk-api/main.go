@@ -95,11 +95,13 @@ func startSdk()*channel.Client {
 
 	defer sdk.Close()
 
+	// 创建Channel
 	if err := fsdk.CreateChannel(sdk, initInfo); err != nil {
 		fmt.Println(err.Error())
 		return nil
 	}
 
+	// 安装链码
 	channelClient, err := InstallAndInstantiateCC(sdk, initInfo)
 	if err != nil {
 		fmt.Println(err.Error())
