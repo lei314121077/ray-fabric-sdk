@@ -2,7 +2,7 @@ name: "data-transfer-network"
 #
 # Schema version of the content. Used by the SDK to apply the corresponding parsing rules.
 #
-version: 1.0.0
+version: 1.4.0
 
 #
 # The client section used by GO SDK.

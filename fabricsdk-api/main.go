@@ -16,10 +16,10 @@ import (
 
 //TODO https://godoc.org/github.com/hyperledger/fabric-sdk-go/pkg/fabsdk/api
 const (
-	ChaincodeVersion  = "1.0"      //指定Chaincode 版本
-	configFile = "config.yaml"   // config.yaml 文件
-	initialized = false
-	SimpleCC = "simplecc"
+	ChaincodeVersion     = "1.4"      //指定Chaincode 版本
+	configFile           = "config.yaml"   // config.yaml 文件
+	initialized          = false
+	DataExchangeCenterCC = "DataExchangeCenter" //ChainCode 名称
 )
 
 func InstallAndInstantiateCC(sdk *fabsdk.FabricSDK, info *fsdk.InitInfo) (*channel.Client, error) {
@@ -81,7 +81,7 @@ func startSdk()*channel.Client {
 		OrgName:        "Org1",
 		OrdererOrgName: "orderer.www.google.com",
 
-		ChaincodeID:     SimpleCC,
+		ChaincodeID:     DataExchangeCenterCC,
 		ChaincodeGoPath: os.Getenv("GOPATH"),
 		ChaincodePath:   "github.com/www.google.com/chaincode/",
 		UserName:        "User1",
@@ -117,8 +117,8 @@ func main() {
 	//启动SDK 判断channel句柄是否为nil
 	if channelClient := startSdk(); channelClient != nil{
 		serviceSetup := fsdkapi.ServiceSetup{
-			ChaincodeID:SimpleCC,
-			Client:channelClient,
+			ChaincodeID: DataExchangeCenterCC,
+			Client:      channelClient,
 		}
 		app := fsdkapi.Application{
 			Setup: &serviceSetup,
