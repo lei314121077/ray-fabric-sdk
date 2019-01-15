@@ -39,11 +39,11 @@ declare -a PKGS=(
     "sdkpatch/cryptosuitebridge"
     "sdkpatch/cachebridge"
 
+    "core/common/privdata"
     "core/ledger/kvledger/txmgmt/version"
     "core/ledger/util"
 
     "msp"
-    "msp/cache"
 
     "discovery/client"
     "gossip/util"
@@ -80,6 +80,7 @@ declare -a FILES=(
     "bccsp/sw/fileks.go"
     "bccsp/sw/hash.go"
     "bccsp/sw/impl.go"
+    "bccsp/sw/inmemoryks.go"
     "bccsp/sw/internals.go"
     "bccsp/sw/keyderiv.go"
     "bccsp/sw/keygen.go"
@@ -109,14 +110,13 @@ declare -a FILES=(
 
     "common/ledger/ledger_interface.go"
 
-    "common/metrics/server.go"
-    "common/metrics/tally_provider.go"
-    "common/metrics/types.go"
+    "common/metrics/provider.go"
 
     "sdkpatch/logbridge/logbridge.go"
     "sdkpatch/cryptosuitebridge/cryptosuitebridge.go"
     "sdkpatch/cachebridge/cache.go"
 
+    "core/common/privdata/collection.go"
     "core/ledger/ledger_interface.go"
     "core/ledger/kvledger/txmgmt/version/version.go"
 
@@ -129,7 +129,6 @@ declare -a FILES=(
     "msp/mspmgrimpl.go"
     "msp/mspimplsetup.go"
     "msp/mspimplvalidate.go"
-    "msp/cache/cache.go"
 
     "discovery/client/api.go"
     "discovery/client/client.go"
@@ -255,10 +254,8 @@ FILTER_FN=
 gofilter
 
 FILTER_FILENAME="common/util/utils.go"
-FILTER_FN="GenerateIDfromTxSHAHash,ComputeSHA256,CreateUtcTimestamp,ConcatenateBytes"
+FILTER_FN="CreateUtcTimestamp,ConcatenateBytes"
 gofilter
-sed -i'' -e 's/&bccsp.SHA256Opts{}/factory.GetSHA256Opts()/g' "${TMP_PROJECT_PATH}/${FILTER_FILENAME}"
-sed -i'' -e 's/"github.com\/hyperledger\/fabric\/bccsp\/factory"/factory "github.com\/hyperledger\/fabric-sdk-go\/internal\/github.com\/hyperledger\/fabric\/sdkpatch\/cryptosuitebridge"/g' "${TMP_PROJECT_PATH}/${FILTER_FILENAME}"
 
 FILTER_FILENAME="common/channelconfig/applicationorg.go"
 FILTER_FN=
@@ -284,6 +281,20 @@ gofilter
 FILTER_FILENAME="core/ledger/kvledger/txmgmt/version/version.go"
 FILTER_FN=
 gofilter
+
+FILTER_FILENAME="discovery/client/signer.go"
+cat >> ${TMP_PROJECT_PATH}/${FILTER_FILENAME} <<EOF
+
+func computeSHA256(data []byte) (hash []byte) {
+	hash, err := factory.GetDefault().Hash(data, factory.GetSHA256Opts())
+	if err != nil {
+		panic(fmt.Errorf("Failed computing SHA256 on [% x]", data))
+	}
+	return
+}
+EOF
+sed -i'' -e 's/util\.ComputeSHA256/computeSHA256/g' "${TMP_PROJECT_PATH}/${FILTER_FILENAME}"
+sed -i'' -e 's/"github.com\/hyperledger\/fabric\/common\/util"/factory "github.com\/hyperledger\/fabric-sdk-go\/internal\/github.com\/hyperledger\/fabric\/sdkpatch\/cryptosuitebridge"/g' "${TMP_PROJECT_PATH}/${FILTER_FILENAME}"
 
 FILTER_FILENAME="msp/factory.go"
 FILTER_FN=
@@ -414,6 +425,9 @@ FILTER_FILENAME="common/channelconfig/orderer.go"
 gofilter
 
 FILTER_FILENAME="common/channelconfig/organization.go"
+gofilter
+
+FILTER_FILENAME="common/util/utils.go"
 gofilter
 
 # Apply patching

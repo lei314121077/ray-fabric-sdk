@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-# This script installs dependencies for testing chaincode-tools
+# This script installs dependencies for testing tools
 # Environment variables that affect this script:
 # GO_DEP_COMMIT: Tag or commit level of the go dep tool to install
 
@@ -15,6 +15,7 @@ GO_DEP_CMD="${GO_DEP_CMD:-dep}"
 GO_DEP_REPO="github.com/golang/dep"
 GO_METALINTER_CMD="${GO_METALINTER_CMD:-gometalinter}"
 GOPATH="${GOPATH:-${HOME}/go}"
+#GOPATH="${GOPATH:-${HOME}/go/data-transfer-chaincode/data-transfer-share-libray}"
 
 DEPEND_SCRIPT_REVISION=$(git log -1 --pretty=format:"%h" test/scripts/dependencies.sh)
 DATE=$(date +"%m-%d-%Y")
@@ -127,12 +128,12 @@ function isDependencyCurrent {
     fi
 }
 
-# isDependenciesInstalled checks that Go chaincode-tools are installed and help the user if they are missing
+# isDependenciesInstalled checks that Go tools are installed and help the user if they are missing
 function isDependenciesInstalled {
     declare printMsgs=$1
     declare -a msgs=()
 
-    # Check that Go chaincode-tools are installed and help the user if they are missing
+    # Check that Go tools are installed and help the user if they are missing
     type gocov >/dev/null 2>&1 || msgs+=("gocov is not installed (go get -u github.com/axw/gocov/...)")
     type gocov-xml >/dev/null 2>&1 || msgs+=("gocov-xml is not installed (go get -u github.com/AlekSi/gocov-xml)")
     type mockgen >/dev/null 2>&1 || msgs+=("mockgen is not installed (go get -u github.com/golang/mock/mockgen)")

@@ -22,6 +22,13 @@ const (
 	DataExchangeCenterCC = "DataExchangeCenter" //ChainCode 名称
 )
 
+
+/*
+@name 安装和序列化链码
+@param sdk fabricSDK句柄
+@param info SDK 配置信息对象
+@return channel.client  error
+*/
 func InstallAndInstantiateCC(sdk *fabsdk.FabricSDK, info *fsdk.InitInfo) (*channel.Client, error) {
 
 	fmt.Println("开始安装链码......")
@@ -33,13 +40,14 @@ func InstallAndInstantiateCC(sdk *fabsdk.FabricSDK, info *fsdk.InitInfo) (*chann
 
 	//包含安装链代码请求参数
 	installCCReq := resmgmt.InstallCCRequest{Name: info.ChaincodeID, Path: info.ChaincodePath, Version: ChaincodeVersion, Package: ccPkg}
+
 	// 允许管理员将链代码安装到节点的文件系统上
 	_, err = info.OrgResMgmt.InstallCC(installCCReq, resmgmt.WithRetry(retry.DefaultResMgmtOpts))
 	if err != nil {
 		return nil, fmt.Errorf("安装链码失败: %v", err)
 	}
 
-	fmt.Println("指定的链码安装成功")
+	fmt.Println("指定的链码安装成功......")
 	fmt.Println("开始实例化链码......")
 
 	// 返回一个有效的策略
@@ -69,7 +77,7 @@ func InstallAndInstantiateCC(sdk *fabsdk.FabricSDK, info *fsdk.InitInfo) (*chann
 }
 
 
-
+//启动SDK
 func startSdk()*channel.Client {
 
 	initInfo := &fsdk.InitInfo{
@@ -85,6 +93,7 @@ func startSdk()*channel.Client {
 		ChaincodeGoPath: os.Getenv("GOPATH"),
 		ChaincodePath:   "github.com/www.google.com/chaincode/",
 		UserName:        "User1",
+
 	}
 
 	sdk, err := fsdk.SetupSDK(configFile, initialized)
