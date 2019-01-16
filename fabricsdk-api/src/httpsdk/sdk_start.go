@@ -1,4 +1,4 @@
-package fsdk
+package httpsdk
 
 import (
 	"fmt"
@@ -10,7 +10,7 @@ import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
 )
 
-
+//实例化SDK
 func SetupSDK(ConfigFile string, initialized bool) (*fabsdk.FabricSDK, error) {
 
 	if initialized {
@@ -26,6 +26,9 @@ func SetupSDK(ConfigFile string, initialized bool) (*fabsdk.FabricSDK, error) {
 	return sdk, nil
 }
 
+
+
+//创建channnel
 func CreateChannel(sdk *fabsdk.FabricSDK, info *InitInfo) error {
 
 	clientContext := sdk.Context(fabsdk.WithUser(info.OrgAdmin), fabsdk.WithOrg(info.OrgName))

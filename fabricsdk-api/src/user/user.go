@@ -3,16 +3,19 @@ package user
 import (
 	"encoding/json"
 	"fmt"
+	"ray/fsdk"
 	"net/http"
-	"ray/fsdkapi"
 )
 
+var (
+	app = &fsdk.Application{}
+)
 //TODO
-func (app *fsdkapi.Application) UserApi(w http.ResponseWriter, r *http.Request) {
+func (u *User) UserApi(w http.ResponseWriter, r *http.Request) {
 	loginName := r.FormValue("loginName")
 	password := r.FormValue("password")
 
-	u := Result{loginName, password}
+	user := Result{loginName, password}
 
 	js, err := json.Marshal(u)
 	if err != nil {
@@ -20,7 +23,7 @@ func (app *fsdkapi.Application) UserApi(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	msg, err := fsdkapi.ServiceSetup.UserDemoSer(u.name, u.passwd)
+	msg, err := u.UserDemoSer(user.name, user.passwd, app)
 	if err != nil{
 		fmt.Println(err.Error())
 		return

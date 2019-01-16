@@ -1,11 +1,11 @@
-package web
+package httpsdk
 
 import (
 	"crypto/tls"
 	"flag"
+	"demo"
 	"log"
 	"net/http"
-	"ray/fsdkapi"
 )
 
 
@@ -37,7 +37,7 @@ func init() {
 
 }
 
-func HttpStart(app fsdkapi.Application){
+func HttpStart(){
 
 
 	flag.Parse()
@@ -53,10 +53,12 @@ func HttpStart(app fsdkapi.Application){
 	// 注册用户
 	mux.HandleFunc("/reguser", func(w http.ResponseWriter, req *http.Request){})
 
+
+	d := demo.DemoController{}
 	// demo
-	mux.HandleFunc("/demo", app.DemoApi)
+	mux.HandleFunc("/demo", d.DemoApi)
 	// user
-	mux.HandleFunc("/user", app.UserApi)
+	//mux.HandleFunc("/user", app.UserApi)
 
 	// tls验证
 	cfg := &tls.Config{

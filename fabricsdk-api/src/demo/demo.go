@@ -4,11 +4,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"ray/fsdkapi"
+	"ray/fsdk"
 )
 
-func (app *fsdkapi.Application) DemoApi(w http.ResponseWriter, r *http.Request){
+var (
+	app = &fsdk.Application{}
+)
 
+func (d DemoController) DemoApi(w http.ResponseWriter, r *http.Request){
 
 	res := Demo{"hello", "123456"}
 
@@ -18,7 +21,7 @@ func (app *fsdkapi.Application) DemoApi(w http.ResponseWriter, r *http.Request){
 		return
 	}
 
-	msg, err := fsdkapi.ServiceSetup.DemoSer(u.name, u.passwd)
+	msg, err := d.DemoSer(res.name, res.passwd, app)
 	if err != nil{
 		fmt.Println(err.Error())
 		return

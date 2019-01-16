@@ -1,4 +1,4 @@
-package fsdkapi
+package fsdk
 
 import "github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
 
@@ -11,3 +11,4 @@ type ServiceSetup struct {
 type Application struct {
 	Setup *ServiceSetup
 }
+

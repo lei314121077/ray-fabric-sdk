@@ -1,9 +1,7 @@
 package main
 
 import (
-	"./src/fsdk"
-	"./src/web"
-	"ray/fsdkapi"
+	"./src/httpsdk"
 	"fmt"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt"
@@ -12,14 +10,17 @@ import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/fabsdk"
 	"github.com/hyperledger/fabric-sdk-go/third_party/github.com/hyperledger/fabric/common/cauthdsl"
 	"os"
+	"ray/fsdk"
+
 )
 
 //TODO https://godoc.org/github.com/hyperledger/fabric-sdk-go/pkg/fabsdk/api
 const (
-	ChaincodeVersion     = "1.4"      //指定Chaincode 版本
-	configFile           = "config.yaml"   // config.yaml 文件
+	ChaincodeVersion     = "1.4"      				//指定Chaincode 版本
+	configFile           = "config.yaml"   			// config.yaml 文件
 	initialized          = false
-	DataExchangeCenterCC = "DataExchangeCenter" //ChainCode 名称
+	DataExchangeCenterCC = "DataExchangeCenter" 	//ChainCode 名称
+	channdelId 			 = "A0000000000001"
 )
 
 
@@ -29,7 +30,7 @@ const (
 @param info SDK 配置信息对象
 @return channel.client  error
 */
-func InstallAndInstantiateCC(sdk *fabsdk.FabricSDK, info *fsdk.InitInfo) (*channel.Client, error) {
+func InstallAndInstantiateCC(sdk *fabsdk.FabricSDK, info *httpsdk.InitInfo) (*channel.Client, error) {
 
 	fmt.Println("开始安装链码......")
 	// 创建新的golang chaincode包
@@ -79,10 +80,10 @@ func InstallAndInstantiateCC(sdk *fabsdk.FabricSDK, info *fsdk.InitInfo) (*chann
 
 //启动SDK
 func startSdk()*channel.Client {
+	fmt.Println("-----start sdk")
+	initInfo := &httpsdk.InitInfo{
 
-	initInfo := &fsdk.InitInfo{
-
-		ChannelID:     "ray-data-transfer",
+		ChannelID:     channdelId,
 		ChannelConfig: os.Getenv("GOPATH") + "/src/github.com/data-transfer-chaincode/.../channel.tx",
 
 		OrgAdmin:       "Admin",
@@ -91,12 +92,12 @@ func startSdk()*channel.Client {
 
 		ChaincodeID:     DataExchangeCenterCC,
 		ChaincodeGoPath: os.Getenv("GOPATH"),
-		ChaincodePath:   "github.com/www.google.com/chaincode/",
+		ChaincodePath:   "transfer-chaincode",
 		UserName:        "User1",
 
 	}
 
-	sdk, err := fsdk.SetupSDK(configFile, initialized)
+	sdk, err := httpsdk.SetupSDK(configFile, initialized)
 	if err != nil {
 		fmt.Printf(err.Error())
 		return nil
@@ -105,7 +106,7 @@ func startSdk()*channel.Client {
 	defer sdk.Close()
 
 	// 创建Channel
-	if err := fsdk.CreateChannel(sdk, initInfo); err != nil {
+	if err := httpsdk.CreateChannel(sdk, initInfo); err != nil {
 		fmt.Println(err.Error())
 		return nil
 	}
@@ -117,24 +118,30 @@ func startSdk()*channel.Client {
 		return nil
 	}
 
-	fmt.Println(channelClient)
+	fmt.Println("end start sdk",channelClient)
 	return channelClient
 }
 
 func main() {
-
+	fmt.Println("开始启动+++")
 	//启动SDK 判断channel句柄是否为nil
 	if channelClient := startSdk(); channelClient != nil{
-		serviceSetup := fsdkapi.ServiceSetup{
+		serviceSetup := fsdk.ServiceSetup{
 			ChaincodeID: DataExchangeCenterCC,
 			Client:      channelClient,
 		}
-		app := fsdkapi.Application{
+
+		app := &fsdk.Application{
 			Setup: &serviceSetup,
 		}
+
+		if app.Setup.ChaincodeID != "" && app.Setup.Client != nil{
+			fmt.Println("sdk启动成功！")
+		}
+
 		//启动https服务
-		web.HttpStart(app)
+		httpsdk.HttpStart()
 	}else{
-		fmt.Println("启动失败!")
+		fmt.Println("服务启动失败!")
 	}
 }

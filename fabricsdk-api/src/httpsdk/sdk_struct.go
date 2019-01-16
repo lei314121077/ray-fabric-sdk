@@ -1,4 +1,4 @@
-package fsdk
+package httpsdk
 
 import (
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt"
@@ -21,8 +21,6 @@ type InitInfo struct {
 	//SDK           *fabsdk.FabricSDK                	//SDK实例
 
 }
-
-
 
 
 
