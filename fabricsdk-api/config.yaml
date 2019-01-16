@@ -46,7 +46,7 @@ client:
 
   # MSP根目录
   cryptoconfig:
-    path: ${GOPATH}/src/github.com/hyperledger/fabric/AssetExchange/deploy/crypto-config
+    path: ${GOPATH}/src/ray/data-transfer/crypto-config
 
   # 某些SDK支持插件化的KV数据库, 通过指定credentialStore属性实现
   credentialStore:
@@ -75,9 +75,9 @@ client:
     # 可选，客户端和peers与orderes进行TLS握手的密钥和证书
     client:
       key:
-        path: ${GOPATH}/src/github.com/hyperledger/fabric-sdk-go/${CRYPTOCONFIG_FIXTURES_PATH}/peerOrganizations/tls.example.com/users/User1@tls.example.com/tls/client.key
+        path: ${GOPATH}/src/ray/data-transfer/crypto-config/peerOrganizations/127.0.0.1/tls/client.key
       cert:
-        path: ${GOPATH}/src/github.com/hyperledger/fabric-sdk-go/${CRYPTOCONFIG_FIXTURES_PATH}/peerOrganizations/tls.example.com/users/User1@tls.example.com/tls/client.crt
+        path: ${GOPATH}/src/ray/data-transfer/crypto-config/peerOrganizations/127.0.0.1/tls/client.crt
 
 
 # 如果应用程序创建了通道，不需要本部分
@@ -188,7 +188,7 @@ organizations:
   org1:
     mspid: Org1MSP
     # 组织的MSP存储位置，绝对路径或相对cryptoconfig的路径
-    cryptoPath:  peerOrganizations/org1.example.com/users/{username}@org1.example.com/msp
+    cryptoPath:  ${GOPATH}/src/ray/data-transfer/crypto-config/peerOrganizations/127.0.0.1/msp
     peers:
       - peer0.org1.example.com
       - peer1.org1.example.com
@@ -201,7 +201,7 @@ organizations:
     mspid: Org2MSP
 
     # 组织的MSP存储位置，相对于cryptoconfig的相对位置或绝对路径
-    cryptoPath:  peerOrganizations/org2.example.com/users/{username}@org2.example.com/msp
+    cryptoPath:  ${GOPATH}/src/ray/data-transfer/crypto-config/peerOrganizations/127.0.0.1/msp
     peers:
       - peer0.org2.example.com
     certificateAuthorities:
@@ -212,7 +212,7 @@ organizations:
     # 组织的MSPID
     mspID: OrdererMSP
     # 加载用户需要的密钥和证书，绝对路径或相对路径
-    cryptoPath: ordererOrganizations/example.com/users/{username}@example.com/msp
+    cryptoPath: ${GOPATH}/src/ray/data-transfer/crypto-config/ordererOrganizations/127.0.0.1/msp
 
 # 发送交易请求或通道创建、更新请求到的orderers列表
 # 如果定义了超过一个orderer，SDK使用哪一个orderer由代码实现时指定
@@ -233,7 +233,7 @@ orderers:
 
     tlsCACerts:
       # 证书的绝对路径
-      path: ${GOPATH}/src/github.com/hyperledger/fabric-sdk-go/${CRYPTOCONFIG_FIXTURES_PATH}/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
+      path: ${GOPATH}/src/ray/data-transfer/crypto-config/ordererOrganizations/127.0.0.1/msp/tlsca.example.com-cert.pem
 
 # peers节点列表
 peers:
@@ -252,7 +252,7 @@ peers:
 
     tlsCACerts:
       # 证书的绝对路径
-      path: ${GOPATH}/src/github.com/hyperledger/fabric-sdk-go/${CRYPTOCONFIG_FIXTURES_PATH}/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
+      path: ${GOPATH}/src/ray/data-transfer/crypto-config/peerOrganizations/127.0.0.1/msp/tlsca.org1.example.com-cert.pem
 
 # Fabric-CA是Hyperledger Fabric提供了特殊的证书颁发机构，可以通过REST API管理证书。
 # 应用程序可以选择使用一个标准的证书颁发机构代替Fabric-CA，此时本部分不需要指定
@@ -262,13 +262,13 @@ certificateAuthorities:
     url: https://ca.org1.example.com:7054
     tlsCACerts:
       # Comma-Separated list of paths
-      path: ${GOPATH}/src/github.com/hyperledger/fabric-sdk-go/${CRYPTOCONFIG_FIXTURES_PATH}/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
+      path: ${GOPATH}/src/ray/data-transfer/crypto-config/peerOrganizations/127.0.0.1/msp/tlsca.org1.example.com-cert.pem
       # 客户端和Fabric CA进行SSL握手的密钥和证书
       client:
         key:
-          path: ${GOPATH}/src/github.com/hyperledger/fabric-sdk-go/${CRYPTOCONFIG_FIXTURES_PATH}/peerOrganizations/tls.example.com/users/User1@tls.example.com/tls/client.key
+          path: ${GOPATH}/src/ray/data-transfer/crypto-config/peerOrganizations/127.0.0.1/msp/users/User1@tls.example.com/tls/client.key
         cert:
-          path: ${GOPATH}/src/github.com/hyperledger/fabric-sdk-go/${CRYPTOCONFIG_FIXTURES_PATH}/peerOrganizations/tls.example.com/users/User1@tls.example.com/tls/client.crt
+          path: ${GOPATH}/src/ray/data-transfer/crypto-config/peerOrganizations/127.0.0.1/users/User1@tls.example.com/tls/client.crt
 
     # Fabric-CA支持通过REST API进行动态用户注册
     registrar:

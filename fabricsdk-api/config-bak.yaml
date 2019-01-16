@@ -4,7 +4,6 @@ name: "datatransfercc-network"
 # Describe what the target network is/does.
 description: "The network which will host data trabsfer cc network"
 
-
 #指定版本
 version: 2
 
