@@ -2,7 +2,7 @@ package demo
 
 import (
 	"encoding/json"
-	"event"
+	"ray/event"
 	"fmt"
 	"ray/fsdk"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
