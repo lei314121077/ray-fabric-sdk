@@ -1,4 +1,4 @@
-package httpsdk
+package fsdk
 
 import (
 	"fmt"

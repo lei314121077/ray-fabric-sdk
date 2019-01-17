@@ -10,7 +10,7 @@ import (
 
 
 var(
-	addr = flag.String("http", "localhost:50051", "endpoint of YourService")
+	addr = flag.String("http", "localhost:8000", "endpoint of YourService")
 
 )
 

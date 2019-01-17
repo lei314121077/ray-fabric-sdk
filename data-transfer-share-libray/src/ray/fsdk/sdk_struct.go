@@ -1,9 +1,9 @@
-package httpsdk
+package fsdk
 
 import (
+	"github.com/hyperledger/fabric-sdk-go/pkg/client/channel"
 	"github.com/hyperledger/fabric-sdk-go/pkg/client/resmgmt"
 )
-
 
 type InitInfo struct {
 
@@ -20,6 +20,17 @@ type InitInfo struct {
 	UserName    string								// 组织用户名称
 	//SDK           *fabsdk.FabricSDK                	//SDK实例
 
+}
+
+
+type ServiceSetup struct {
+	ChaincodeID	string
+	Client	*channel.Client
+}
+
+
+type Application struct {
+	Setup *ServiceSetup
 }
 
 
