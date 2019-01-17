@@ -6,6 +6,7 @@ import (
 	"demo"
 	"log"
 	"net/http"
+	"order"
 )
 
 
@@ -57,8 +58,10 @@ func HttpStart(){
 	d := demo.DemoController{}
 	// demo
 	mux.HandleFunc("/demo", d.DemoApi)
+	o := order.Order{}
 	// user
-	//mux.HandleFunc("/user", app.UserApi)
+	mux.HandleFunc("/addOrderApi", o.AddOrderHistoryApi)
+	//mux.HandleFunc("/modifyOrderApi", o.AddOrderHistoryApi)
 
 	// tls验证
 	cfg := &tls.Config{

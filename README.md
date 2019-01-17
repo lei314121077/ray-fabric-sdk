@@ -2,40 +2,46 @@
 
 
 ## 目录
-
-```bash
-
-    data-transfer-chaincode
-    ├── data-transfer-share-libray     # 公共包
-    │   ├── bin
-    │   ├── pkg
-    │   └── src                        # 自定义包
-    │       └── ray
-    │       
-    ├── fabricsdk-api                  # api
-    │   ├── bin
-    │   ├── key.sh
-    │   ├── main.go
-    │   ├── pkg
-    │   ├── README.md
-    │   ├── server.rsa.crt
-    │   ├── server.rsa.key
-    │   └── src
-    │     
-    ├── README.md                      # markdown 描述文档
-    │     
-    └── transfer-chaincode             # chain code包
-        ├── bin
-        ├── build.sh
-        ├── data-transfer-chaincode
-        ├── docker-compose.yml
-        ├── Dockerfile
-        ├── main.go
-        ├── pkg
-        ├── README.md
-        └── src
-       
-```
+    
+   ```bash
+        
+        data-transfer-chaincode
+        ├── data-transfer-share-libray     # 公共包
+        │   ├── bin
+        │   ├── pkg
+        │   └── src                        # 自定义包
+        │       └── ray
+        │       
+        ├── fabricsdk-api                  # api
+        │   ├── build.sh
+        │   ├── config-bak.yaml
+        │   ├── config.yaml
+        │   ├── crypto-config.yaml
+        │   ├── main.go
+        │   ├── pkg
+        │   │   └── fabric账本.jpg
+        │   ├── README.md
+        │   └── src
+        │        ├── demo
+        │        ├── httpsdk
+        │        └── order
+        │     
+        ├── transfer-chaincode             # chain code包
+        │   ├── bin
+        │   ├── build.sh
+        │   ├── data-transfer-chaincode
+        │   ├── docker-compose.yml
+        │   ├── Dockerfile
+        │   ├── main.go
+        │   ├── pkg
+        │   ├── README.md
+        │   └── src 
+        │
+        ├── README.md                      # markdown 描述文档
+        │     
+        └── 
+             
+   ```
 
 
 ## 版本&环境
@@ -73,7 +79,7 @@
     
     ```bash
       go version
-      go version go1.10 
+      go version go1.11 
     ```    
 
 * 拉取镜像
