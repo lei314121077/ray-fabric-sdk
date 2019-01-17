@@ -1,4 +1,4 @@
-package payments
+package paymentscc
 
 
 type Payment struct{}

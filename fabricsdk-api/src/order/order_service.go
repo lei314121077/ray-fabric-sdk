@@ -47,7 +47,7 @@ func (o *Order) ModifyOrderHistorySer(order Order, s *fsdk.Application)(string, 
 		return "", fmt.Errorf("指定的edu对象序列化时发生错误")
 	}
 
-	req := channel.Request{ChaincodeID: s.Setup.ChaincodeID, Fcn: "ModifyHistory", Args: [][]byte{b, []byte(eventID)}}
+	req := channel.Request{ChaincodeID: s.Setup.ChaincodeID, Fcn: "modifyHistory", Args: [][]byte{b, []byte(eventID)}}
 	respone, err := s.Setup.Client.Execute(req)
 	if err != nil {
 		return "", err

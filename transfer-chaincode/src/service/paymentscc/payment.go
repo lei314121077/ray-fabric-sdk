@@ -1,4 +1,4 @@
-package payments
+package paymentscc
 
 import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"

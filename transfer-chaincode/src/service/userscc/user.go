@@ -1,4 +1,4 @@
-package users
+package userscc
 
 import (
 	"encoding/json"
