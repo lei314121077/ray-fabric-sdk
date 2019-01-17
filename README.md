@@ -11,7 +11,7 @@
         │   ├── pkg
         │   └── src                        # 自定义包
         │       └── ray
-        │       
+        │     
         ├── fabricsdk-api                  # api
         │   ├── build.sh
         │   ├── config-bak.yaml
@@ -25,7 +25,7 @@
         │        ├── demo
         │        ├── httpsdk
         │        └── order
-        │     
+        │  
         ├── transfer-chaincode             # chain code包
         │   ├── bin
         │   ├── build.sh
@@ -36,10 +36,8 @@
         │   ├── pkg
         │   ├── README.md
         │   └── src 
-        │
-        ├── README.md                      # markdown 描述文档
         │     
-        └── 
+        └── README.md                      # markdown 描述文档
              
    ```
 

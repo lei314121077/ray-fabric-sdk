@@ -42,46 +42,7 @@
   
   ![ChainCode角色图](https://pic3.zhimg.com/80/v2-30fe8099f29c036254b59f3a0ac2147e_hd.jpg)
   
-  
-  * 步骤1、 启动网络
 
-  * 步骤2、Fabric Chaincode 负责实现具体的只能合约业务逻辑方法
-   
-  * 步骤3、本地通过SDK实现具体的操作
-       
-      * 后台语言JAVA通过[SDK](https://github.com/hyperledger/fabric-sdk-java)插入区块，获取区块信息
-       
-      * 后台语言GO通过[SDK](https://github.com/hyperledger/fabric-sdk-go)插入区块，获取区块信息
-       
-      * 后台语言Python通过[SDK](https://github.com/hyperledger/fabric-sdk-py)插入区块，获取区块信息 
-    
-
-## 链码功能
-   
-   Peer节点主要功能是调用链码执行交易和记账，其中交易执行由背书节点的链码负责，记账功能由记账节点负责。
-
-   ![fabric](/home/ray/go/data-transfer-chaincode/transfer-chaincode/pkg/chaincode.jpg)
-
-   链码与Peer节点的交互过程如下：
-   
-   * A、链码通过gRPC与Peer节点交互，当Peer节点收到客户端的交易提案请求后，会发送一个链码消息对象（包含交易提案信息、调用者信息）给对应的链码。
-   
-   * B、链码调用Invoke方法，通过发送获取数据（GetState）和写入数据（PutState）消息，向Peer节点获取账本状态信息和发送预提交状态。
-   
-   * C、链码发送模拟执行结果给Peer节点，Peer节点对交易提案和模拟执行结果进行背书签名。  
-  
-## 部署与应用
-  
-docker
-
-* 执行Dockerfile生成docker镜像
-  
-  ```bash
-     docker build -t data-transfer-center
-  ```
-   
-  
- 
     
 
 
