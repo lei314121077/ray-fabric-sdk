@@ -62,7 +62,7 @@ func (o *Order) ModifyOrderHistorySer(order Order, s *fsdk.Application)(string, 
 }
 
 
-func (o *Order) OrderHistorySer(workNo, userId string, isHow int, s *fsdk.Application)([]byte, error){
+func (o *Order) OrderHistorySer(workNo, userId,isHow string, s *fsdk.Application)([]byte, error){
 
 	req := channel.Request{ChaincodeID: s.Setup.ChaincodeID, Fcn: "queryOrderHistry", Args: [][]byte{[]byte(workNo), []byte(userId), []byte(isHow)}}
 	respone, err := s.Setup.Client.Query(req)

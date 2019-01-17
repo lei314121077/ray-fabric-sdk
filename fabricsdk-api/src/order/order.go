@@ -90,7 +90,7 @@ func (o *Order) ModifyHistoryApi(w http.ResponseWriter, r *http.Request){
 func (o *Order) QueryHistoryApi(w http.ResponseWriter, r *http.Request){
 	workNo := r.FormValue("workNo")									// 工单号
 	userId := r.FormValue("userId")									// 用户id
-	isHow, _ := strconv.Atoi(r.FormValue("isHow"))					// 是供方还是需方
+	isHow := r.FormValue("isHow")									// 是供方还是需方
 	msg, err := o.OrderHistorySer(workNo, userId, isHow, &fsdk.App)
 	if err != nil{
 		fmt.Println(err.Error())

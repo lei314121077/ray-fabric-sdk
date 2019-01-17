@@ -122,7 +122,7 @@ func startSdk()*channel.Client {
 	return channelClient
 }
 
-func InitSdk()*Application{
+func InitSdk(){
 
 	fmt.Println("开始启动+++")
 
@@ -139,7 +139,7 @@ func InitSdk()*Application{
 
 		if App.Setup.ChaincodeID != "" && App.Setup.Client != nil{
 			fmt.Println("sdk启动成功！")
-			return App
+			return
 		}
 
 		//启动https服务
