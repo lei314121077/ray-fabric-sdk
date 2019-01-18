@@ -2,26 +2,31 @@ version: "3"
 
 services:
 
-  sdkchaincode:
-    image: sdk-and-cc
+  share-libray:
+    image: data-transfer-share-libray
+    ontainer_name: share-libray
+    working_dir: $HOME/go/data-transfer-chaincode/
+
+  transfer-chaincode:
+    image: fabric-cc
+    ontainer_name: fabric-cc
+    working_dir: $HOME/go/data-transfer-chaincode/
+
+
+  fabric-sdk-api:
+    image: sdk-api
     ports:
       - "8000:8000"
-    ontainer_name: sdkcc
-#    depends_on:
-#      - share-libray
-#      - fabric-cc
-#    links:
-#      - fabric-cc
-#      - peer
-#      - ca
-#      - msp
+    ontainer_name: sdk-api
+    depends_on:
+      - share-libray
+      - fabric-cc
+    links:
+      - fabric-cc
+    #      - peer
+    #      - ca
+    #      - msp
     working_dir: $HOME/go/data-transfer-chaincode/
     volumes:
+
       - ./run.sh
-
-
-
-
-
-
-
