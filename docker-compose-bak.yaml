@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+
+  sdkchaincode:
+    image: sdk-and-cc
+    ports:
+      - "8000:8000"
+    ontainer_name: sdkcc
+#    depends_on:
+#      - share-libray
+#      - fabric-cc
+#    links:
+#      - fabric-cc
+#      - peer
+#      - ca
+#      - msp
+    working_dir: $HOME/go/data-transfer-chaincode/
+    volumes:
+      - ./run.sh
+
+
+
+
+
+
+

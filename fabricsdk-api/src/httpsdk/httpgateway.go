@@ -54,14 +54,15 @@ func HttpStart(){
 	// 注册用户
 	mux.HandleFunc("/reguser", func(w http.ResponseWriter, req *http.Request){})
 
-
-	d := demo.DemoController{}
 	// demo
+	d := demo.DemoController{}
 	mux.HandleFunc("/demo", d.DemoApi)
-	o := order.Order{}
+
 	// user
+	o := order.Order{}
 	mux.HandleFunc("/addOrderApi", o.AddOrderHistoryApi)
-	//mux.HandleFunc("/modifyOrderApi", o.AddOrderHistoryApi)
+	mux.HandleFunc("/modifyOrderApi", o.ModifyHistoryApi)
+	mux.HandleFunc("/quseryHistoryApi", o.QueryHistoryApi)
 
 	// tls验证
 	cfg := &tls.Config{

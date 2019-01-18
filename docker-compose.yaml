@@ -29,7 +29,7 @@ services:
     working_dir: $HOME/go/data-transfer-chaincode/
     volumes:
 
-
+      - ./run.sh
 
 
 

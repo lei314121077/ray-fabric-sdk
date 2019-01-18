@@ -11,8 +11,7 @@ ADD transfer-libray $HOME/go/data-transfer-chaincode/data-transfer-share-libray
 ADD sdk-api $HOME/go/data-transfer-chaincode/farbicsdk-api
 
 RUN echo "构建环境！:"
-RUN cd $HOME/go/data-transfer-chaincode && ./build && ./data-transfer-cc && cd ../farbicsdk-api && ./build && ./farbic-api
-
+RUN cd $HOME/go/data-transfer-chaincode && ./run.sh
 
 
 #go构建可执行文件
