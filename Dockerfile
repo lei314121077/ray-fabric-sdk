@@ -21,7 +21,7 @@ RUN cd $HOME/go/data-transfer-chaincode && ./run.sh
 #CMD ["./data-transfer-chaincode"]
 
 #暴露端口
-#EXPOSE 7272
+EXPOSE 8000
 
 #最终运行docker的命令
 #ENTRYPOINT  ["./data-transfer-chaincode"]

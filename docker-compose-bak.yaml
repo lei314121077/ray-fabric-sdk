@@ -16,7 +16,7 @@ services:
   fabric-sdk-api:
     image: sdk-api
     ports:
-      - "8000:8000"
+      - "8000:80"
     ontainer_name: sdk-api
     depends_on:
       - share-libray
