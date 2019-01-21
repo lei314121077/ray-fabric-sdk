@@ -4,10 +4,10 @@ services:
 
   sdkchaincode:
 
-    image: sdk-and-cc
+    image: data-transfer-cc
     ports:
-      - "8000:8000"
-    ontainer_name: sdkcc
+      - "8000:80"
+#    ontainer_name: sdkchaincode
     #    depends_on:
     #      - share-libray
     #      - fabric-cc

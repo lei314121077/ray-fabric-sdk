@@ -8,9 +8,9 @@ CCPath ="$ProPath/transfer-chaincode"
 # settings this pro gpath
 export GOPATH="$LibrayPath:$CCPath:$SdkApiPATH"
 
-# build your pro app
-cd $SdkApiPATH && ./build.sh && cd $CCPath && ./build.sh
+# build and run your fabric sdk api
+cd $SdkApiPATH && ./build.sh && ./farbic-api
 
-# run your pro app
-cd $SdkApiPATH && ./farbic-api && cd $CCPath && ./data-transfer-cc
+# build and run your fabric chaincode
+cd $CCPath && ./build.sh && ./data-transfer-cc
 

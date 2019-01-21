@@ -1,43 +1,41 @@
 # 数据交易中心-智能合约
 
-
-## 目录
+* 目录
     
-   ```bash
-        
-        data-transfer-chaincode
-        ├── data-transfer-share-libray     # 公共包
-        │   ├── bin
-        │   ├── pkg
-        │   └── src                        # 自定义包
-        │       └── ray
-        │     
-        ├── fabricsdk-api                  # api
-        │   ├── build.sh
-        │   ├── config-bak.yaml
-        │   ├── config.yaml
-        │   ├── crypto-config.yaml
-        │   ├── main.go
-        │   ├── pkg
-        │   │   └── fabric账本.jpg
-        │   ├── README.md
-        │   └── src
-        │        ├── demo
-        │        ├── httpsdk
-        │        └── order
-        │  
-        ├── transfer-chaincode             # chain code包
-        │   ├── bin
-        │   ├── build.sh
-        │   ├── data-transfer-chaincode
-        │   ├── docker-compose.yml
-        │   ├── Dockerfile
-        │   ├── main.go
-        │   ├── pkg
-        │   ├── README.md
-        │   └── src 
-        │     
-        └── README.md                      # markdown 描述文档
+   ```bash      
+       data-transfer-chaincode
+       ├── data-transfer-share-libray     # 公共包
+       │   ├── bin
+       │   ├── pkg
+       │   └── src                        # 自定义包
+       │       └── ray
+       │     
+       ├── fabricsdk-api                  # api
+       │   ├── build.sh
+       │   ├── config-bak.yaml
+       │   ├── config.yaml
+       │   ├── crypto-config.yaml
+       │   ├── main.go
+       │   ├── pkg
+       │   │   └── fabric账本.jpg
+       │   ├── README.md
+       │   └── src
+       │        ├── demo
+       │        ├── httpsdk
+       │        └── order
+       │  
+       ├── transfer-chaincode             # chain code包
+       │   ├── bin
+       │   ├── build.sh
+       │   ├── data-transfer-chaincode
+       │   ├── docker-compose.yml
+       │   ├── Dockerfile
+       │   ├── main.go
+       │   ├── pkg
+       │   ├── README.md
+       │   └── src 
+       │   
+       └── README.md                      # markdown 描述文档
              
    ```
 
@@ -109,7 +107,26 @@
 
 ## 部署
 
+```bash
+# 路径
+cd $HOME/go/data-transfer-chaincode/
+# 构建镜像
+docker build -t data-transfer-cc:ubuntu16.04-1.0.0.0 .
 
+# 你会看见
+REPOSITORY             TAG                          IMAGE ID            CREATED             SIZE
+data-transfer-cc      ubuntu16.04-1.0.0.0          e19542dca1e5        23 seconds ago      793MB
+
+
+
+
+
+# 运行镜像 
+docker-compose -f docker-compose.yaml up -d
+
+
+
+```
 
 
 ## 业务流程

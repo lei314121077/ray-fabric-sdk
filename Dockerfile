@@ -7,11 +7,13 @@ WORKDIR $HOME/go/data-transfer-chaincode
 
 #将服务器的go工程代码加入到docker容器中
 ADD transfer-chaincode $HOME/go/data-transfer-chaincode
-ADD transfer-libray $HOME/go/data-transfer-chaincode/data-transfer-share-libray
-ADD sdk-api $HOME/go/data-transfer-chaincode/farbicsdk-api
+#ADD transfer-chaincode $HOME/go/data-transfer-chaincode/transfer-chaincode
+#ADD transfer-libray $HOME/go/data-transfer-chaincode/data-transfer-share-libray
+#ADD sdk-api $HOME/go/data-transfer-chaincode/farbicsdk-api
 
-RUN echo "构建环境！:"
-RUN cd $HOME/go/data-transfer-chaincode && ./run.sh
+RUN echo "开始构建环境！:"
+CMD ["./run.sh"]
+RUN echo "构建环境成功！:"
 
 
 #go构建可执行文件
@@ -21,7 +23,7 @@ RUN cd $HOME/go/data-transfer-chaincode && ./run.sh
 #CMD ["./data-transfer-chaincode"]
 
 #暴露端口
-EXPOSE 8000
+EXPOSE 8000:80
 
 #最终运行docker的命令
 #ENTRYPOINT  ["./data-transfer-chaincode"]
