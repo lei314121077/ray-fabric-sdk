@@ -118,7 +118,8 @@ REPOSITORY             TAG                          IMAGE ID            CREATED 
 data-transfer-cc      ubuntu16.04-1.0.0.0          e19542dca1e5        23 seconds ago      793MB
 
 
-
+# 运行镜像 
+docker run -itd -p 8000:80  data-transfer-cc:ubuntu16.04-1.0.0.0 .
 
 
 # 运行镜像 

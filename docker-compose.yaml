@@ -2,7 +2,7 @@ version: "3"
 
 services:
 
-  sdkchaincode:
+  data-transfer-sdkchaincode:
 
     image: data-transfer-cc
     ports:

@@ -48,11 +48,14 @@ func HttpStart(){
 	// 根目录
 	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
-		w.Write([]byte("这是一个示例服务.\n"))
+		w.Write([]byte("hello world.\n"))
 	})
 
 	// 注册用户
-	mux.HandleFunc("/reguser", func(w http.ResponseWriter, req *http.Request){})
+	mux.HandleFunc("/reguser", func(w http.ResponseWriter, req *http.Request){
+		w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
+		w.Write([]byte("hello world.\n"))
+	})
 
 	// demo
 	d := demo.DemoController{}
