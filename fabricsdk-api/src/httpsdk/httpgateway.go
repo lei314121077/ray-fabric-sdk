@@ -1,12 +1,14 @@
 package httpsdk
 
 import (
-	"crypto/tls"
-	"flag"
 	"demo"
+	"flag"
 	"log"
+	"github.com/gorilla/mux"
 	"net/http"
+	"crypto/tls"
 	"order"
+	"time"
 )
 
 
@@ -42,30 +44,21 @@ func HttpStart(){
 
 
 	flag.Parse()
-
-	mux := http.NewServeMux()
-
-	// 根目录
-	mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+	router := mux.NewRouter()
+	router.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
-		w.Write([]byte("hello world.\n"))
-	})
-
-	// 注册用户
-	mux.HandleFunc("/reguser", func(w http.ResponseWriter, req *http.Request){
-		w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
-		w.Write([]byte("hello world.\n"))
-	})
+		w.Write([]byte("This is an example server.\n"))
+	}).Methods("GET")
 
 	// demo
 	d := demo.DemoController{}
-	mux.HandleFunc("/demo", d.DemoApi)
+	router.HandleFunc("/demo", d.DemoApi).Methods("POST")
 
 	// user
 	o := order.Order{}
-	mux.HandleFunc("/addOrderApi", o.AddOrderHistoryApi)
-	mux.HandleFunc("/modifyOrderApi", o.ModifyHistoryApi)
-	mux.HandleFunc("/quseryHistoryApi", o.QueryHistoryApi)
+	router.HandleFunc("/addOrderApi", o.AddOrderHistoryApi).Methods("POST")
+	router.HandleFunc("/modifyOrderApi", o.ModifyHistoryApi).Methods("POST")
+	router.HandleFunc("/quseryHistoryApi", o.QueryHistoryApi).Methods("POST")
 
 	// tls验证
 	cfg := &tls.Config{
@@ -82,12 +75,16 @@ func HttpStart(){
 
 	srv := &http.Server{
 		Addr:         *addr,
-		Handler:      mux,
+		WriteTimeout: time.Second * 15,
+		ReadTimeout:  time.Second * 15,
+		IdleTimeout:  time.Second * 60,
+		Handler: router, // Pass our instance of gorilla/mux in.
 		TLSConfig:    cfg,
 		TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler), 0),
 	}
 
+	log.Fatal(http.ListenAndServe(*addr, router))
 	log.Fatal(srv.ListenAndServeTLS("./server.rsa.crt", "./server.rsa.key"))
-}
 
+}
 

@@ -6,8 +6,8 @@ type DemoController struct{
 
 
 type Demo struct {
-	name string
-	passwd string
+	Name string `json:"name,omitempty"`
+	Passwd string `json:"passwd,omitempty"`
 }
 
 

@@ -3,8 +3,8 @@ package order
 import (
 	"encoding/json"
 	"fmt"
-	"ray/fsdk"
 	"net/http"
+	"ray/fsdk"
 	"strconv"
 )
 
@@ -33,6 +33,7 @@ func (o *Order) AddOrderHistoryApi(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err.Error())
 		return
 	}
+
 	fmt.Printf("ok:%v", msg)
 
 	js, err := json.Marshal(order)
