@@ -36,7 +36,7 @@ type IdentityDeserializer interface {
 // credentials to authenticate their transactions, and peers use these credentials
 // to authenticate transaction processing results (endorsements). While
 // strongly connected to the transaction processing components of the systems,
-// this interface aims to have membership channels components defined, in such
+// this interface aims to have membership services components defined, in such
 // a way such that alternate implementations of this can be smoothly plugged in
 // without modifying the core of transaction processing components of the system.
 //

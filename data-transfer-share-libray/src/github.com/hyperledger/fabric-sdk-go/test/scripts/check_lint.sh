@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-# This script runs Go linting and vetting chaincode-tools
+# This script runs Go linting and vetting tools
 
 set -e
 LINT_CHANGED_ONLY="${LINT_CHANGED_ONLY:-false}"

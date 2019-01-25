@@ -25,6 +25,8 @@ declare -a PKGS=(
     "protos/ledger/rwset"
     "protos/ledger/rwset/kvrwset"
     "protos/orderer"
+
+    "protos/token"
 )
 
 declare -a FILES=(
@@ -34,6 +36,7 @@ declare -a FILES=(
     "protos/common/ledger.pb.go"
     "protos/common/policies.pb.go"
     "protos/common/collection.pb.go"
+    "protos/common/signed_data.go"
 
     "protos/peer/chaincode.pb.go"
     "protos/peer/chaincode_event.pb.go"
@@ -54,6 +57,10 @@ declare -a FILES=(
     "protos/ledger/rwset/kvrwset/kv_rwset.pb.go"
 
     "protos/orderer/configuration.pb.go"
+
+    "protos/token/expectations.pb.go"
+    "protos/token/prover.pb.go"
+    "protos/token/transaction.pb.go"
 )
 
 # Create directory structure for packages
@@ -101,6 +108,18 @@ do
     sed -i'' -e "/proto.RegisterType/s/protos/${NAMESPACE_PREFIX}protos/g" "${TMP_PROJECT_PATH}/${i}"
     sed -i'' -e "/proto.RegisterMapType/s/protos/${NAMESPACE_PREFIX}protos/g" "${TMP_PROJECT_PATH}/${i}"
     sed -i'' -e "/proto.RegisterEnum/s/protos/${NAMESPACE_PREFIX}protos/g" "${TMP_PROJECT_PATH}/${i}"
+  fi
+  if [[ ${i} == "protos/token"* ]]; then
+    sed -i'' -e "/proto.RegisterType/s/protos/${NAMESPACE_PREFIX}protos/g" "${TMP_PROJECT_PATH}/${i}"
+    sed -i'' -e "/proto.RegisterType/s/TokenTransaction\"/${NAMESPACE_PREFIX}TokenTransaction\"/g" "${TMP_PROJECT_PATH}/${i}"
+    sed -i'' -e "/proto.RegisterType/s/PlainTokenAction\"/${NAMESPACE_PREFIX}PlainTokenAction\"/g" "${TMP_PROJECT_PATH}/${i}"
+    sed -i'' -e "/proto.RegisterType/s/PlainImport\"/${NAMESPACE_PREFIX}PlainImport\"/g" "${TMP_PROJECT_PATH}/${i}"
+    sed -i'' -e "/proto.RegisterType/s/PlainTransfer\"/${NAMESPACE_PREFIX}PlainTransfer\"/g" "${TMP_PROJECT_PATH}/${i}"
+    sed -i'' -e "/proto.RegisterType/s/PlainApprove\"/${NAMESPACE_PREFIX}PlainApprove\"/g" "${TMP_PROJECT_PATH}/${i}"
+    sed -i'' -e "/proto.RegisterType/s/PlainTransferFrom\"/${NAMESPACE_PREFIX}PlainTransferFrom\"/g" "${TMP_PROJECT_PATH}/${i}"
+    sed -i'' -e "/proto.RegisterType/s/PlainOutput\"/${NAMESPACE_PREFIX}PlainOutput\"/g" "${TMP_PROJECT_PATH}/${i}"
+    sed -i'' -e "/proto.RegisterType/s/InputId\"/${NAMESPACE_PREFIX}InputId\"/g" "${TMP_PROJECT_PATH}/${i}"
+    sed -i'' -e "/proto.RegisterType/s/PlainDelegatedOutput\"/${NAMESPACE_PREFIX}PlainDelegatedOutput\"/g" "${TMP_PROJECT_PATH}/${i}"
   fi
 done
 
