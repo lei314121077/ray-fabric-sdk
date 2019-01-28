@@ -1,6 +1,7 @@
 package httpsdk
 
 import (
+	"crypto/tls"
 	"demo"
 	"flag"
 	"fmt"
@@ -9,12 +10,11 @@ import (
 	"net/http"
 	"order"
 	"time"
-	"crypto/tls"
 )
 
 
 var(
-	addr = flag.String("http", "0.0.0.0:8000", "endpoint of YourService")
+	addr = flag.String("http", "127.0.0.1:8000", "endpoint of YourService")
 
 )
 
@@ -83,10 +83,11 @@ func HttpStart(){
 		TLSConfig:    cfg,
 		TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler), 0),
 	}
-	fmt.Println("ok start successfull !")
 
-	log.Fatal(http.ListenAndServe(*addr, router))
+	//log.Fatal(http.ListenAndServe(*addr, router))
+
 	log.Fatal(srv.ListenAndServeTLS("./server.rsa.crt", "./server.rsa.key"))
+	fmt.Println("ok start http and tls successfull !")
 
 }
 
