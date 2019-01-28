@@ -15,7 +15,7 @@ import (
 
 
 var(
-	addr = flag.String("http", "127.0.0.1:8000", "endpoint of YourService")
+	addr = flag.String("http", "0.0.0.0:8000", "endpoint of YourService")
 
 )
 
