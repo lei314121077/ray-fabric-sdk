@@ -42,6 +42,16 @@
 
 ## 版本&环境
 
+* date-transfer-cc
+    
+    ```bashrc
+    
+    git clone -b v1.4.0 http://192.168.40.131/hyperledger-fabric-chaincode/data-transfer-chaincode.git
+
+    
+    ```
+ 
+
 * Hyperledger Fabric v1.4.0
 
     ```bash
