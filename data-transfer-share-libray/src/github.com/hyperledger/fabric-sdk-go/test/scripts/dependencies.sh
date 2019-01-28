@@ -15,7 +15,6 @@ GO_DEP_CMD="${GO_DEP_CMD:-dep}"
 GO_DEP_REPO="github.com/golang/dep"
 GO_METALINTER_CMD="${GO_METALINTER_CMD:-gometalinter}"
 GOPATH="${GOPATH:-${HOME}/go}"
-#GOPATH="${GOPATH:-${HOME}/go/data-transfer-chaincode/data-transfer-share-libray}"
 
 DEPEND_SCRIPT_REVISION=$(git log -1 --pretty=format:"%h" test/scripts/dependencies.sh)
 DATE=$(date +"%m-%d-%Y")
