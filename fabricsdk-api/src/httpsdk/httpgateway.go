@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"order"
 	"time"
+
 )
 
 
@@ -83,10 +84,10 @@ func HttpStart(){
 		TLSConfig:    cfg,
 		TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler), 0),
 	}
-
+	basePath := "/root/go/data-transfer-chaincode/fabricsdk-api/src/httpsdk/"
 	//log.Fatal(http.ListenAndServe(*addr, router))
 
-	log.Fatal(srv.ListenAndServeTLS("./server.rsa.crt", "./server.rsa.key"))
+	log.Fatal(srv.ListenAndServeTLS(fmt.Sprintf("%v%v", basePath, "tls.crt"), fmt.Sprintf("%v%v", basePath, "tls.key")))
 	fmt.Println("ok start http and tls successfull !")
 
 }
