@@ -10,7 +10,6 @@ import (
 	"net/http"
 	"order"
 	"time"
-
 )
 
 
@@ -47,20 +46,6 @@ func HttpStart(){
 
 	flag.Parse()
 	router := mux.NewRouter()
-	router.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
-		w.Write([]byte("This is an example server.\n"))
-	}).Methods("GET")
-
-	// demo
-	d := demo.DemoController{}
-	router.HandleFunc("/demo", d.DemoApi).Methods("POST")
-
-	// user
-	o := order.Order{}
-	router.HandleFunc("/addOrderApi", o.AddOrderHistoryApi).Methods("POST")
-	router.HandleFunc("/modifyOrderApi", o.ModifyHistoryApi).Methods("POST")
-	router.HandleFunc("/quseryHistoryApi", o.QueryHistoryApi).Methods("POST")
 
 	// tls验证
 	cfg := &tls.Config{
@@ -84,7 +69,28 @@ func HttpStart(){
 		TLSConfig:    cfg,
 		TLSNextProto: make(map[string]func(*http.Server, *tls.Conn, http.Handler), 0),
 	}
+
+	router.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
+		w.Write([]byte("This is an example server.\n"))
+	}).Methods("GET")
+
+	// demo
+	d := demo.DemoController{}
+	router.HandleFunc("/demo", d.DemoApi).Methods("POST")
+
+	// user
+	o := order.Order{}
+	router.HandleFunc("/addOrderApi", o.AddOrderHistoryApi).Methods("POST")
+	router.HandleFunc("/modifyOrderApi", o.ModifyHistoryApi).Methods("POST")
+	router.HandleFunc("/quseryHistoryApi", o.QueryHistoryApi).Methods("POST")
+
+
+	// test dev model
+	//basePath := "/home/ray/go/data-transfer-chaincode/fabricsdk-api/src/httpsdk/"
+	// output dev model
 	basePath := "/root/go/data-transfer-chaincode/fabricsdk-api/src/httpsdk/"
+	// just is http
 	//log.Fatal(http.ListenAndServe(*addr, router))
 
 	log.Fatal(srv.ListenAndServeTLS(fmt.Sprintf("%v%v", basePath, "tls.crt"), fmt.Sprintf("%v%v", basePath, "tls.key")))
