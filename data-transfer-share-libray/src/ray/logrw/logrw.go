@@ -39,17 +39,8 @@ func (this *RayLog) Obj()*log.Logger{
 
 	loger := log.New(logFile, "Start", log.Ldate|log.Ltime|log.Lshortfile)
 	loger.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
-	//fmt.Println(loger.Prefix())
-
-	//Flags返回Logger的输出选项
-	//fmt.Println(loger.Flags())
-	//SetFlags设置输出选项
 	loger.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 
-	//返回输出前缀
-	//fmt.Println(loger.Prefix())
-	//设置输出前缀
-	//loger.SetPrefix("Debug ")
 	this.log = loger
 	return this.log
 }
