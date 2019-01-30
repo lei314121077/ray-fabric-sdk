@@ -18,8 +18,9 @@ const(
 
 )
 
+//var logobj *log.Logger
+
 type RayLog struct{
-	log *log.Logger
 	file string
 }
 
@@ -40,34 +41,32 @@ func (this *RayLog) Obj()*log.Logger{
 	loger := log.New(logFile, "Start", log.Ldate|log.Ltime|log.Lshortfile)
 	loger.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	loger.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
-
-	this.log = loger
-	return this.log
+	return loger
 }
 
 func (this *RayLog) Debug()*log.Logger {
-	this.Obj()
-	this.log.SetPrefix(LEVEL_DEBUG)
-	return this.log
+	resp := this.Obj()
+	resp.SetPrefix(LEVEL_DEBUG)
+	return resp
 }
 
 
 func (this *RayLog) Info()*log.Logger {
-	this.Obj()
-	this.log.SetPrefix(LEVEL_INFO)
-	return this.log
+	resp := this.Obj()
+	resp.SetPrefix(LEVEL_INFO)
+	return resp
 }
 
 func (this *RayLog) Waring()*log.Logger {
-	this.Obj()
-	this.log.SetPrefix(LEVEL_Waring)
-	return this.log
+	resp := this.Obj()
+	resp.SetPrefix(LEVEL_Waring)
+	return resp
 }
 
 func (this *RayLog) Error()*log.Logger {
-	this.Obj()
-	this.log.SetPrefix(LEVEL_Error)
-	return this.log
+	resp := this.Obj()
+	resp.SetPrefix(LEVEL_Error)
+	return resp
 }
 
 //
