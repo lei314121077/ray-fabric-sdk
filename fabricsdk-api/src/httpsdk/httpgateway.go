@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"order"
+	"ray/logrw"
 	"time"
 )
 
@@ -16,9 +17,13 @@ import (
 var(
 	addr = flag.String("http", "0.0.0.0:8000", "endpoint of YourService")
 
+	file = "./" + time.Now().Format("20060102") + ".log"
 )
 
-var users []User
+var (
+	users []User
+	Rlog logrw.RayLog
+)
 
 type User struct {
 	LoginName	string
@@ -28,7 +33,7 @@ type User struct {
 
 
 func init() {
-
+	//Rlog = logrw.RayLog{file}
 	admin := User{LoginName:"Ray", Password:"123456", IsAdmin:"T"}
 	alice := User{LoginName:"ChainDesk", Password:"123456", IsAdmin:"T"}
 	bob := User{LoginName:"alice", Password:"123456", IsAdmin:"F"}
@@ -92,7 +97,7 @@ func HttpStart(){
 	basePath := "/root/go/data-transfer-chaincode/fabricsdk-api/src/httpsdk/"
 	// just is http
 	//log.Fatal(http.ListenAndServe(*addr, router))
-
+	Rlog.Debug().Printf("debug",srv.ListenAndServeTLS(fmt.Sprintf("%v%v", basePath, "tls.crt"), fmt.Sprintf("%v%v", basePath, "tls.key")))
 	log.Fatal(srv.ListenAndServeTLS(fmt.Sprintf("%v%v", basePath, "tls.crt"), fmt.Sprintf("%v%v", basePath, "tls.key")))
 	fmt.Println("ok start http and tls successfull !")
 
